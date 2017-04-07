@@ -8,7 +8,7 @@ var drawRect = function (ctx, x, y, width, height, color) {
 var drawText = function (ctx, color, fontStyle, text, x, y) {
   ctx.fillStyle = color;
   ctx.font = fontStyle;
-  ctx.strokeText(text, x, y);
+  ctx.fillText(text, x, y);
 };
 
 window.renderStatistics = function (ctx, names, times) {
@@ -23,12 +23,10 @@ window.renderStatistics = function (ctx, names, times) {
 
   var maxScore = function () {
     var max = -1;
-    var maxIndex = -1;
     for (var i = 0; i < times.length; i++) {
       var time = times[i];
       if (time > max) {
         max = time;
-        maxIndex = i;
       }
     }
     return max;
@@ -45,10 +43,11 @@ window.renderStatistics = function (ctx, names, times) {
 
   for (var y = 0; y < times.length; y++) {
     if (names[y] === 'Вы') {
-      drawText(ctx, '#000', '16px PT Mono', Math.floor(times[y]), initialX + indent * y, initialY + histogramHeight - times[y] * step - 7);
+      drawText(ctx, '#000', '16px PT Mono', Math.floor(times[y]), initialX + indent * y, initialY + histogramHeight - times[y] * step - 19);
       drawRect(ctx, initialX + indent * y, initialY + histogramHeight - times[y] * step, histogramWeight, step * times[y], 'rgba(255, 0, 0, 1)');
+      drawText(ctx, '#000', '16px PT Mono', names[y], initialX + indent * y, initialY + histogramHeight);
     } else {
-      drawText(ctx, '#000', '16px PT Mono', Math.floor(times[y]), initialX + indent * y, initialY + histogramHeight - times[y] * step - 7);
+      drawText(ctx, '#000', '16px PT Mono', Math.floor(times[y]), initialX + indent * y, initialY + histogramHeight - times[y] * step - 19);
       drawRect(ctx, initialX + indent * y, initialY + histogramHeight - times[y] * step, histogramWeight, step * times[y], 'rgba(0, 0, 255, ' + Math.random() + ')');
       ctx.textBaseline = 'top';
       drawText(ctx, '#000', '16px PT Mono', names[y], initialX + indent * y, initialY + histogramHeight);
