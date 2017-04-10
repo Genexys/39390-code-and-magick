@@ -120,6 +120,4 @@ var setupSimilarList = document.querySelector('.setup-similar-list');
 
 setupSimilarList.appendChild(fragment);
 
-
-
 document.querySelector('.setup-similar').classList.remove('hidden');
